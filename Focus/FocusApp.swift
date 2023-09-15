@@ -1,6 +1,6 @@
 //
-//  GrindApp.swift
-//  Grind
+//  FocusApp.swift
+//  Focus
 //
 //  Created by Amy Li on 9/3/23.
 //
