@@ -31,7 +31,7 @@ struct MainView: View {
 
 
 // View for starting a timer for focus session
-struct TimerView: View {
+struct SessionView: View {
     @State private var isSessionRunning = false
     
     var body: some View {
@@ -42,7 +42,7 @@ struct TimerView: View {
                     .fontWeight(.bold)
                     .frame(height: 1.0)
                     .padding(.vertical, 5)
-                NavigationLink(destination: FocusView(), isActive: $isSessionRunning) {
+                NavigationLink(destination: TimerView(), isActive: $isSessionRunning) {
                                     FocusButton(title: "Focus!", textColor: .white, backgroundColor: .red, w: 80, h: 30)
                                 }
                 }
@@ -53,13 +53,6 @@ struct TimerView: View {
     }
 }
 
-struct FocusView: View {
-    var body: some View{
-        Text("In focus.")
-//        .navigationBarBackButtonHidden(true) // add end session early button if activate this
-    }
-    
-}
 
 
 // preview
