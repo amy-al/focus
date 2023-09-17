@@ -32,7 +32,7 @@ struct MainView: View {
 
 // View for starting a timer for focus session
 struct SessionView: View {
-    @State private var isSessionRunning = false
+    @State private var isSessionRunning = false // where to toggle? in view or when button is clicked?
     
     var body: some View {
         NavigationView{
@@ -42,7 +42,7 @@ struct SessionView: View {
                     .fontWeight(.bold)
                     .frame(height: 1.0)
                     .padding(.vertical, 5)
-                NavigationLink(destination: TimerView(), isActive: $isSessionRunning) {
+                NavigationLink(destination: TimerView()) {
                                     FocusButton(title: "Focus!", textColor: .white, backgroundColor: .red, w: 80, h: 30)
                                 }
                 }

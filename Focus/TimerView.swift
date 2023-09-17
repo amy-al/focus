@@ -14,27 +14,41 @@ struct TimerView: View {
     @State private var isCountingDown = false
     @State private var remainingTime = 0
     @State private var timer: Timer?
+    
+    
+    @State private var selectedHours = 0
+    @State private var selectedMinutes = 0
+    
 
     var body: some View {
         VStack {
             Text("Focus in session.")
                 .font(.title)
-                .padding()
             
-            TextField("Enter minutes", text: $minutesInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
-                .padding()
+            Picker("Hours", selection: $selectedHours) {
+                ForEach(0..<24, id: \.self) { hour in
+                    Text("\(hour) hours")
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
+
+            Picker("Minutes", selection: $selectedMinutes) {
+                ForEach(0..<60, id: \.self) { minute in
+                    Text("\(minute) minutes")
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
             
             Button(action: startCountdown) {
                 Text("Start timer")
-                    .font(.headline)
+//                    .font(.headline)
                     .padding()
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
             .disabled(isCountingDown)
+            
             
             ZStack {
                 Circle()
@@ -47,7 +61,6 @@ struct TimerView: View {
                     .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                     .foregroundColor(.blue)
                     .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut)
                 
                 Text("\(formatTime(remainingTime))")
                     .font(.largeTitle)
@@ -59,19 +72,18 @@ struct TimerView: View {
     }
 
     func startCountdown() {
-        guard let minutes = Int(minutesInput), minutes > 0 else {
-            return
-        }
         
-        let totalSeconds = minutes * 60
+        let totalSeconds = selectedHours * 60 * 60 + selectedMinutes * 60
         remainingTime = totalSeconds
         isCountingDown = true
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if remainingTime > 0 {
-                remainingTime -= 1
-            } else {
-                stopCountdown()
+        withAnimation(.easeInOut) {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if remainingTime > 0 {
+                    remainingTime -= 1
+                } else {
+                    stopCountdown()
+                }
             }
         }
     }
@@ -83,13 +95,14 @@ struct TimerView: View {
     }
 
     func getTotalSeconds() -> Double {
-        return Double(Int(minutesInput) ?? 0) * 60
+        return (Double(selectedHours * 60 * 60 + selectedMinutes * 60))
     }
 
     func formatTime(_ seconds: Int) -> String {
-        let minutes = seconds / 60
-        let seconds = seconds % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let remainingSeconds = seconds % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
     }
 }
 
