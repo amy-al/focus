@@ -16,10 +16,15 @@ struct MainView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .frame(height: 1.0)
-                Text("Let's get to work.")
+                Text("Let's get to work. Start a focus session.")
                     .font(.subheadline)
                 NavigationLink(destination: TimerView()) {
-                                    FocusButton(title: "Get started", textColor: .white, backgroundColor: .blue, w: 120, h: 30)
+                                    FocusButton(title: "Start", textColor: .white, backgroundColor: .blue, w: 80, h: 30)
+                    }
+                Text("Add to todolist!")
+                    .font(.subheadline)
+                NavigationLink(destination: TodolistView()) {
+                                    FocusButton(title: "Add", textColor: .white, backgroundColor: .blue, w: 80, h: 30)
                     }
             }
             .navigationBarTitle("", displayMode: .inline) // no need for default navigation bar title display
@@ -52,6 +57,7 @@ struct SessionView: View {
             .navigationBarBackButtonHidden(true)
     }
 }
+
 
 
 

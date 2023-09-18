@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E424092E2AB607C20026F07E /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E424092D2AB607C20026F07E /* TimerView.swift */; };
+		E42409302AB867AA0026F07E /* TodolistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E424092F2AB867AA0026F07E /* TodolistView.swift */; };
 		E44A7F702AA443D200761686 /* FocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44A7F6F2AA443D200761686 /* FocusApp.swift */; };
 		E44A7F722AA443D200761686 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44A7F712AA443D200761686 /* MainView.swift */; };
 		E44A7F742AA443D400761686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E44A7F732AA443D400761686 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		E424092D2AB607C20026F07E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		E424092F2AB867AA0026F07E /* TodolistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodolistView.swift; sourceTree = "<group>"; };
 		E44A7F6C2AA443D200761686 /* Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Focus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44A7F6F2AA443D200761686 /* FocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusApp.swift; sourceTree = "<group>"; };
 		E44A7F712AA443D200761686 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				E424092D2AB607C20026F07E /* TimerView.swift */,
 				E44A7F6F2AA443D200761686 /* FocusApp.swift */,
+				E424092F2AB867AA0026F07E /* TodolistView.swift */,
 				E44A7F712AA443D200761686 /* MainView.swift */,
 				E44A7F992AA45ACC00761686 /* FocusButton.swift */,
 				E44A7F732AA443D400761686 /* Assets.xcassets */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42409302AB867AA0026F07E /* TodolistView.swift in Sources */,
 				E44A7F722AA443D200761686 /* MainView.swift in Sources */,
 				E44A7F9A2AA45ACC00761686 /* FocusButton.swift in Sources */,
 				E424092E2AB607C20026F07E /* TimerView.swift in Sources */,
