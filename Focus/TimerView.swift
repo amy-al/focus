@@ -19,6 +19,8 @@ struct TimerView: View {
     @State private var selectedHours = 0
     @State private var selectedMinutes = 0
     
+    private let timerKey = "TimerState" // save state
+    
 
     var body: some View {
         VStack {
@@ -69,18 +71,29 @@ struct TimerView: View {
             .padding()
         }
         .padding()
+        // Save the timer state when the view appears
+        .onAppear {
+            loadTimerState()
+        }
+        // Start or stop the timer when the view disappears
+//        .onDisappear {
+//            if isCountingDown {
+//                stopCountdown()
+//            }
+//        }
     }
-
+    
     func startCountdown() {
-        
+
         let totalSeconds = selectedHours * 60 * 60 + selectedMinutes * 60
         remainingTime = totalSeconds
         isCountingDown = true
-        
+
         withAnimation(.easeInOut) {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if remainingTime > 0 {
                     remainingTime -= 1
+                    saveTimerState()
                 } else {
                     stopCountdown()
                 }
@@ -92,6 +105,23 @@ struct TimerView: View {
         timer?.invalidate()
         timer = nil
         isCountingDown = false
+        // Clear the timer state in UserDefaults
+        UserDefaults.standard.removeObject(forKey: timerKey)
+    }
+
+
+    func saveTimerState() {
+        UserDefaults.standard.set(remainingTime, forKey: timerKey)
+    }
+
+    func loadTimerState() {
+        if let savedTime = UserDefaults.standard.value(forKey: timerKey) as? Int {
+            remainingTime = savedTime
+            if remainingTime > 0 {
+                isCountingDown = true
+                startCountdown()
+            }
+        }
     }
 
     func getTotalSeconds() -> Double {
@@ -105,4 +135,5 @@ struct TimerView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
     }
 }
+
 
