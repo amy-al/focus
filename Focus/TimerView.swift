@@ -27,30 +27,31 @@ struct TimerView: View {
             Text("Focus in session.")
                 .font(.title)
             
-            Picker("Hours", selection: $selectedHours) {
-                ForEach(0..<24, id: \.self) { hour in
-                    Text("\(hour) hours")
+            if !isCountingDown {
+                Picker("Hours", selection: $selectedHours) {
+                    ForEach(0..<24, id: \.self) { hour in
+                        Text("\(hour) hours")
+                    }
                 }
-            }
-            .pickerStyle(WheelPickerStyle())
+                .pickerStyle(WheelPickerStyle())
 
-            Picker("Minutes", selection: $selectedMinutes) {
-                ForEach(0..<60, id: \.self) { minute in
-                    Text("\(minute) minutes")
+                Picker("Minutes", selection: $selectedMinutes) {
+                    ForEach(0..<60, id: \.self) { minute in
+                        Text("\(minute) minutes")
+                    }
                 }
+                .pickerStyle(WheelPickerStyle())
+                
+                Button(action: startCountdown) {
+                    Text("Start timer")
+    //                    .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .disabled(isCountingDown)
             }
-            .pickerStyle(WheelPickerStyle())
-            
-            Button(action: startCountdown) {
-                Text("Start timer")
-//                    .font(.headline)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .disabled(isCountingDown)
-            
             
             ZStack {
                 Circle()
